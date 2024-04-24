@@ -4,21 +4,17 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AlunosModel;
+use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Alunos extends BaseController
 {
-    private $alunosModel;
-
-    public function __construct()
-    {
-        $this->alunosModel = new AlunosModel();
-    }
+    use ResponseTrait;
 
     public function index()
     {
-        return view('alunos', [
-            'alunos' => $this->alunosModel->findAll()
-        ]);
+        $model = new AlunosModel();
+        $data = $model->findAll();
+        return $this->respond($data);
     }
 }
