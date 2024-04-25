@@ -17,4 +17,10 @@ class Alunos extends BaseController
         $data = $model->findAll();
         return $this->respond($data);
     }
+
+    public function deleteAluno($id)
+    {
+        $this->load->model('AlunosModel');
+        $this->AlunosModel->deleteAluno($id);
+    }
 }

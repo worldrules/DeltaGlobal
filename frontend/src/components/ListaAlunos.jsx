@@ -1,6 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 import ModalDetalhesAluno from './ModalDetalhesAluno';
 
 
@@ -36,9 +38,18 @@ const ListaAlunos = () => {
         setModalIsOpen(true);
     }
 
+    const handleDeleteAluno = async (id) => {
+        try {
+            await axios.delete(`http://localhost:8080/alunos/${id}`);
+            setAlunos(alunos.filter(aluno => aluno.id !== id));
+        } catch (error) {
+            console.error('Erro ao deletar aluno:', error);
+        }
+    }
+
     return (
         <div>
-            <h2>Lista de Alunos</h2>
+            <h2 className="title">Lista de Alunos</h2>
             <table className='table is-striped is-fullwidth'>
                 <thead>
                     <tr>
@@ -55,20 +66,20 @@ const ListaAlunos = () => {
                 </thead>
                 <tbody>
                     {alunos.map((aluno, index) => (
-                        <tr key={index} onClick={() => handleAlunoClick(aluno)}>
-                            <td>{aluno.nome}</td>
-                            <td>{aluno.sobrenome}</td>
-                            <td>{aluno.idade}</td>
-                            <td>{aluno.email}</td>
-                            <td>{aluno.endereco}</td>
-                            <td>{aluno.nome_pai}</td>
-                            <td>{aluno.nome_mae}</td>
+                        <tr key={index}>
+                            <td onClick={() => handleAlunoClick(aluno)}>{aluno.nome}</td>
+                            <td onClick={() => handleAlunoClick(aluno)}>{aluno.sobrenome}</td>
+                            <td onClick={() => handleAlunoClick(aluno)}>{aluno.idade}</td>
+                            <td onClick={() => handleAlunoClick(aluno)}>{aluno.email}</td>
+                            <td onClick={() => handleAlunoClick(aluno)}>{aluno.endereco}</td>
+                            <td onClick={() => handleAlunoClick(aluno)}>{aluno.nome_pai}</td>
+                            <td onClick={() => handleAlunoClick(aluno)}>{aluno.nome_mae}</td>
                             <td>
                                 <input type="file" onChange={(e) => handleFileUpload(e, aluno.id)} />
                             </td>
                             <td>
                                 <button className='button is-small is-info' style={{ marginRight: '5px' }}>Editar</button>
-                                <button className='button is-small is-danger'>Deletar</button>
+                                <button className='button is-small is-danger' onClick={() => handleDeleteAluno(aluno.id)}>Deletar</button>
                             </td>
                         </tr>
                     ))}
@@ -79,6 +90,7 @@ const ListaAlunos = () => {
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
             />
+            <Link to="/adicionar-aluno" className="button is-success">Adicionar um novo aluno</Link>
         </div>
     );
 }
