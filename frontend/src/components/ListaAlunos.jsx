@@ -1,9 +1,18 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ModalDetalhesAluno from './ModalDetalhesAluno';
+
+
+
 
 const ListaAlunos = () => {
     const [alunos, setAlunos] = useState([]);
+    // eslint-disable-next-line no-unused-vars
+    const [alunoSelecionado, setAlunoSelecionado] = useState(null);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+
 
     useEffect(() => {
         getAlunos();
@@ -16,6 +25,15 @@ const ListaAlunos = () => {
         } catch (error) {
             console.error('Erro ao obter alunos:', error);
         }
+    }
+
+    const handleFileUpload = () => {
+        // Lógica para fazer upload do arquivo
+    }
+
+    const handleAlunoClick = (aluno) => {
+        setAlunoSelecionado(aluno);
+        setModalIsOpen(true);
     }
 
     return (
@@ -31,12 +49,13 @@ const ListaAlunos = () => {
                         <th>Endereço</th>
                         <th>Nome do Pai</th>
                         <th>Nome da Mãe</th>
+                        <th>Foto</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     {alunos.map((aluno, index) => (
-                        <tr key={index}>
+                        <tr key={index} onClick={() => handleAlunoClick(aluno)}>
                             <td>{aluno.nome}</td>
                             <td>{aluno.sobrenome}</td>
                             <td>{aluno.idade}</td>
@@ -45,13 +64,21 @@ const ListaAlunos = () => {
                             <td>{aluno.nome_pai}</td>
                             <td>{aluno.nome_mae}</td>
                             <td>
-                                <button className='button is-small is-info'>Editar</button>
+                                <input type="file" onChange={(e) => handleFileUpload(e, aluno.id)} />
+                            </td>
+                            <td>
+                                <button className='button is-small is-info' style={{ marginRight: '5px' }}>Editar</button>
                                 <button className='button is-small is-danger'>Deletar</button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            <ModalDetalhesAluno
+                aluno={alunoSelecionado}
+                isOpen={modalIsOpen}
+                onRequestClose={() => setModalIsOpen(false)}
+            />
         </div>
     );
 }
