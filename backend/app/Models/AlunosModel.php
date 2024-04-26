@@ -56,5 +56,10 @@ class AlunosModel extends Model
         $this->db->where('id', $id);
         $this->db->delete('alunos');
     }
+    public function atualizarFoto($alunoId, $nomeArquivo)
+    {
+        $this->db->where('id', $alunoId);
+        $this->db->update('alunos', ['foto' => $nomeArquivo]);
+    }
 
 }

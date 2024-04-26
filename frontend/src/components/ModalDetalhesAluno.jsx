@@ -1,9 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import Modal from 'react-modal';
-import { DetalhesAluno } from './DetalhesAluno';
+import DetalhesAluno from './DetalhesAluno';
+import PropTypes from 'prop-types';
 
-Modal.setAppElement('#root'); // Define o elemento raiz da aplicação para acessibilidade
+
+Modal.setAppElement('#root');
 
 const ModalDetalhesAluno = ({ aluno, isOpen, onRequestClose }) => {
     return (
@@ -12,10 +14,14 @@ const ModalDetalhesAluno = ({ aluno, isOpen, onRequestClose }) => {
             onRequestClose={onRequestClose}
             contentLabel="Detalhes do Aluno"
         >
-            <button onClick={onRequestClose}>Fechar</button>
-            <DetalhesAluno aluno={aluno} />
+            <DetalhesAluno onRequestClose={onRequestClose} aluno={aluno} />
         </Modal>
     );
 }
+ModalDetalhesAluno.propTypes = {
+    aluno: PropTypes.object,
+    isOpen: PropTypes.bool.isRequired,
+    onRequestClose: PropTypes.func
+};
 
 export default ModalDetalhesAluno;

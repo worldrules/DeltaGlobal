@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import './AdicionarAluno.css';
+
 
 const AdicionarAluno = () => {
     const [formData, setFormData] = useState({
@@ -14,7 +15,7 @@ const AdicionarAluno = () => {
         nome_pai: '',
         nome_mae: ''
     });
-    const navigateTo = useNavigate();
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -23,13 +24,17 @@ const AdicionarAluno = () => {
         });
     };
 
+    const handleCloseSuccessMessage = () => {
+        setShowSuccessMessage(false);
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             const response = await axios.post('http://localhost:8080/alunos', formData);
             console.log('Aluno adicionado com sucesso:', response.data);
-            navigateTo('/')
+            setShowSuccessMessage(true);
         } catch (error) {
             alert('Erro ao adicionar aluno:', error);
         }
@@ -139,6 +144,12 @@ const AdicionarAluno = () => {
                     </div>
                 </div>
             </form>
+            {showSuccessMessage && (
+                <div className="notification is-success">
+                    <Link to="/" onClick={handleCloseSuccessMessage} className="delete is-link"></Link>
+                    Aluno adicionado com sucesso!
+                </div>
+            )}
         </div>
     );
 }

@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import ModalDetalhesAluno from './ModalDetalhesAluno';
+import defaultAvatar from '../assets/default-avatar.jpg';
+
 
 
 
@@ -12,6 +14,7 @@ const ListaAlunos = () => {
     // eslint-disable-next-line no-unused-vars
     const [alunoSelecionado, setAlunoSelecionado] = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+
 
 
 
@@ -49,6 +52,7 @@ const ListaAlunos = () => {
     return (
         <div>
             <h2 className="title">Lista de Alunos</h2>
+
             <table className='table is-striped is-fullwidth'>
                 <thead>
                     <tr>
@@ -74,7 +78,7 @@ const ListaAlunos = () => {
                             <td onClick={() => handleAlunoClick(aluno)}>{aluno.nome_pai}</td>
                             <td onClick={() => handleAlunoClick(aluno)}>{aluno.nome_mae}</td>
                             <td>
-                                <input type="file" onChange={(e) => handleFileUpload(e, aluno.id)} />
+                                <img src={defaultAvatar} alt="Foto do Aluno" className="aluno-avatar-lista" />
                             </td>
                             <td className='buttons'>
                                 <Link to={`/editar-aluno/${aluno.id}`} className='button is-small is-info'>Editar</Link>
@@ -89,7 +93,7 @@ const ListaAlunos = () => {
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
             />
-            <Link to="/adicionar-aluno" className="button is-success">Adicionar um novo aluno</Link>
+            <Link to="/adicionar-aluno" className="buttonadd button is-success">Adicionar um novo aluno</Link>
         </div>
     );
 }

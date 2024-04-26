@@ -93,4 +93,20 @@ class Alunos extends BaseController
 
         return $this->respondDeleted($response);
     }
+
+    public function salvarFoto()
+    {
+        $imagem = $_FILES['imagem'];
+
+        $diretorio = 'frontend/src/assets/';
+        $nomeArquivo = uniqid() . '_' . $imagem['name'];
+        move_uploaded_file($imagem['tmp_name'], $diretorio . $nomeArquivo);
+
+        $alunoId = $this->input->post('aluno_id');
+        $this->Alunos_model->atualizarFoto($alunoId, $nomeArquivo);
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode(['success' => true]));
+    }
 }
