@@ -7,7 +7,6 @@ import ModalDetalhesAluno from './ModalDetalhesAluno';
 
 
 
-
 const ListaAlunos = () => {
     const [alunos, setAlunos] = useState([]);
     // eslint-disable-next-line no-unused-vars
@@ -77,8 +76,8 @@ const ListaAlunos = () => {
                             <td>
                                 <input type="file" onChange={(e) => handleFileUpload(e, aluno.id)} />
                             </td>
-                            <td>
-                                <button className='button is-small is-info' style={{ marginRight: '5px' }}>Editar</button>
+                            <td className='buttons'>
+                                <Link to={`/editar-aluno/${aluno.id}`} className='button is-small is-info'>Editar</Link>
                                 <button className='button is-small is-danger' onClick={() => handleDeleteAluno(aluno.id)}>Deletar</button>
                             </td>
                         </tr>
