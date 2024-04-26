@@ -27,7 +27,7 @@ const AdicionarAluno = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8000/alunos', formData);
+            const response = await axios.post('http://localhost:8080/alunos', formData);
             console.log('Aluno adicionado com sucesso:', response.data);
             navigateTo('/')
         } catch (error) {

@@ -10,30 +10,26 @@ class AlunosModel extends Model
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $useSoftDeletes = false;
+    protected $useSoftDeletes = true;
     protected $protectFields = true;
     protected $allowedFields = [
-
         'nome',
         'sobrenome',
         'idade',
         'email',
         'endereco',
         'nome_pai',
-        'nome_mae',
-        'created_at',
-        'updated_at',
-        'deleted_at'
+        'nome_mae'
     ];
 
-    protected bool $allowEmptyInserts = false;
+    protected bool $allowEmptyInserts = true;
     protected bool $updateOnlyChanged = true;
 
     protected array $casts = [];
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat = 'datetime';
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
@@ -60,4 +56,5 @@ class AlunosModel extends Model
         $this->db->where('id', $id);
         $this->db->delete('alunos');
     }
+
 }
