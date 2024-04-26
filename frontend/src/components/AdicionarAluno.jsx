@@ -1,6 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AdicionarAluno = () => {
     const [formData, setFormData] = useState({
@@ -12,6 +14,7 @@ const AdicionarAluno = () => {
         nome_pai: '',
         nome_mae: ''
     });
+    const navigateTo = useNavigate();
 
     const handleChange = (e) => {
         setFormData({
@@ -20,10 +23,16 @@ const AdicionarAluno = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Lógica para enviar os dados do formulário para o backend
-        console.log(formData);
+
+        try {
+            const response = await axios.post('http://localhost:8000/alunos', formData);
+            console.log('Aluno adicionado com sucesso:', response.data);
+            navigateTo('/')
+        } catch (error) {
+            alert('Erro ao adicionar aluno:', error);
+        }
     };
 
     return (
