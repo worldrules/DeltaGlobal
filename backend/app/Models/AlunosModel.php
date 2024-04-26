@@ -19,7 +19,8 @@ class AlunosModel extends Model
         'email',
         'endereco',
         'nome_pai',
-        'nome_mae'
+        'nome_mae',
+        'foto',
     ];
 
     protected bool $allowEmptyInserts = true;
@@ -51,15 +52,13 @@ class AlunosModel extends Model
     protected $afterFind = [];
     protected $beforeDelete = [];
     protected $afterDelete = [];
-    public function deleteAluno($id)
+
+    public function salvarFoto($id, $foto)
     {
-        $this->db->where('id', $id);
-        $this->db->delete('alunos');
+        $this->set('foto', $foto);
+        $this->where('id', $id);
+        $this->update();
     }
-    public function atualizarFoto($alunoId, $nomeArquivo)
-    {
-        $this->db->where('id', $alunoId);
-        $this->db->update('alunos', ['foto' => $nomeArquivo]);
-    }
+
 
 }

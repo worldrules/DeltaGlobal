@@ -22,20 +22,21 @@ const DetalhesAluno = ({ aluno, onRequestClose }) => {
         }
     };
 
+
     const handleSalvar = async () => {
         try {
             const formData = new FormData();
             formData.append('imagem', imagem);
             formData.append('aluno_id', aluno.id);
 
-            await axios.post('http://localhost:8080/alunos/salvarFoto', formData, {
+            await axios.post(`http://localhost:8080/alunos/upload-foto/${aluno.id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
 
-            // Atualizar a lista de alunos ou realizar outras ações necessárias
             console.log('Imagem salva com sucesso!');
+
         } catch (error) {
             console.error('Erro ao salvar imagem:', error);
         }
@@ -112,7 +113,7 @@ const DetalhesAluno = ({ aluno, onRequestClose }) => {
 
 DetalhesAluno.propTypes = {
     aluno: PropTypes.object,
-    onRequestClose: PropTypes.func,
+    onRequestClose: PropTypes.func
 };
 
 export default DetalhesAluno;

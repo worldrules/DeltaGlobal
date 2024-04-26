@@ -94,19 +94,31 @@ class Alunos extends BaseController
         return $this->respondDeleted($response);
     }
 
-    public function salvarFoto()
+    public function salvarFoto($id = null)
     {
-        $imagem = $_FILES['imagem'];
+        $image = $this->request->getVar('imagem');
+        $model = new AlunosModel();
 
-        $diretorio = 'frontend/src/assets/';
-        $nomeArquivo = uniqid() . '_' . $imagem['name'];
-        move_uploaded_file($imagem['tmp_name'], $diretorio . $nomeArquivo);
 
-        $alunoId = $this->input->post('aluno_id');
-        $this->Alunos_model->atualizarFoto($alunoId, $nomeArquivo);
+        if (!empty($image)) {
 
-        $this->output
-            ->set_content_type('application/json')
-            ->set_output(json_encode(['success' => true]));
+            // Diretório onde as fotos serão armazenadas
+            $uploadPath = WRITEPATH . 'uploads/';
+
+            // Gera um nome único para o arquivo
+            $nomeArquivo = uniqid() . '.png';
+
+            // Salva a imagem no diretório de upload
+            file_put_contents($uploadPath . $nomeArquivo, $image);
+
+            // Atualiza o banco de dados com o nome do arquivo da imagem
+            $model->salvarFoto($id, $image);
+
+            // Retorna uma resposta de sucesso
+            return $this->response->setJSON(['success' => true]);
+        } else {
+            // Retorna uma resposta de erro se a imagem estiver vazia
+            return $this->response->setStatusCode(400)->setJSON(['success' => false, 'message' => 'Imagem vazia']);
+        }
     }
 }

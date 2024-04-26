@@ -2,21 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
-import ModalDetalhesAluno from './ModalDetalhesAluno';
 import defaultAvatar from '../assets/default-avatar.jpg';
-
-
-
+import ModalDetalhesAluno from './ModalDetalhesAluno';
 
 const ListaAlunos = () => {
     const [alunos, setAlunos] = useState([]);
-    // eslint-disable-next-line no-unused-vars
     const [alunoSelecionado, setAlunoSelecionado] = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-
-
-
 
     useEffect(() => {
         getAlunos();
@@ -24,15 +16,12 @@ const ListaAlunos = () => {
 
     const getAlunos = async () => {
         try {
-            const alunos = await axios.get('http://localhost:8080/alunos');
-            setAlunos(alunos.data);
+            const response = await axios.get('http://localhost:8080/alunos');
+            setAlunos(response.data);
+            console.log(alunos)
         } catch (error) {
             console.error('Erro ao obter alunos:', error);
         }
-    }
-
-    const handleFileUpload = () => {
-        // Lógica para fazer upload do arquivo
     }
 
     const handleAlunoClick = (aluno) => {
@@ -47,6 +36,12 @@ const ListaAlunos = () => {
         } catch (error) {
             console.error('Erro ao deletar aluno:', error);
         }
+    }
+
+    const renderizarImagem = (base64Image) => {
+        return (
+            <img src={base64Image} alt="Foto do Aluno" className="aluno-avatar-lista" />
+        );
     }
 
     return (
@@ -78,7 +73,11 @@ const ListaAlunos = () => {
                             <td onClick={() => handleAlunoClick(aluno)}>{aluno.nome_pai}</td>
                             <td onClick={() => handleAlunoClick(aluno)}>{aluno.nome_mae}</td>
                             <td>
-                                <img src={defaultAvatar} alt="Foto do Aluno" className="aluno-avatar-lista" />
+                                {aluno.foto ? (
+                                    renderizarImagem(aluno.foto)
+                                ) : (
+                                    <img src={defaultAvatar} onClick={() => handleAlunoClick(aluno)} alt="Foto do Aluno" className="aluno-avatar-lista" />
+                                )}
                             </td>
                             <td className='buttons'>
                                 <Link to={`/editar-aluno/${aluno.id}`} className='button is-small is-info'>Editar</Link>
