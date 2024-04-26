@@ -76,7 +76,7 @@ class Alunos extends BaseController
         return $this->respond(['message' => 'Aluno atualizado com sucesso.']);
     }
 
-    public function deleteAluno($id)
+    public function delete($id)
     {
         $model = new AlunosModel();
         $findById = $model->find(['id' => $id]);
