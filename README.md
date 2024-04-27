@@ -54,6 +54,7 @@ O projeto foi desenvolvido com as tecnologias abaixo: <br>
 ### 💻Instalação
 Primeiramente é necessário ter no PC, node instalado , xampp se possível.
 O projeto está dividido em duas pastas :
+
 **Backend:**
 Linhas de comando : entrar na pasta backend - > php spark serve
 
