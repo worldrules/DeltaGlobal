@@ -65,7 +65,7 @@ Linhas de comando : entrar na pasta frontend - > npm i , apos alguns minutos -> 
 <iframe src="https://giphy.com/embed/ZfJStbZRuHubxJpZBI" width="480" height="260" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ZfJStbZRuHubxJpZBI">via GIPHY</a></p>
 
 Feito isso temos o Backend rodando e o Frontend rodando.
-OBS.: De preferência Apacha e MySQL rodando , para fazer testes no banco de dados com os seguintes comandos para popular o banco : `CREATE TABLE alunos ( id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(50), sobrenome VARCHAR(50), idade INT, email VARCHAR(100), endereco VARCHAR(255), nome_pai VARCHAR(50), nome_mae VARCHAR(50),foto VARCHAR(50) );`
+OBS.: De preferência Apache e MySQL rodando , para fazer testes no banco de dados com os seguintes comandos para popular o banco : `CREATE TABLE alunos ( id INT AUTO_INCREMENT PRIMARY KEY, nome VARCHAR(50), sobrenome VARCHAR(50), idade INT, email VARCHAR(100), endereco VARCHAR(255), nome_pai VARCHAR(50), nome_mae VARCHAR(50),foto VARCHAR(50) );`
 
 E adicionamos algumas pessoas para fins de testes: `INSERT INTO alunos (nome, sobrenome, idade, email, endereco, nome_pai, nome_mae)
 VALUES
