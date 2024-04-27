@@ -54,12 +54,12 @@ O projeto foi desenvolvido com as tecnologias abaixo: <br>
 ### 💻Instalação
 Primeiramente é necessário ter no PC, node instalado , xampp se possível.
 O projeto está dividido em duas pastas :
-Backend:
+**Backend:**
 Linhas de comando : entrar na pasta backend - > php spark serve
 
 <iframe src="https://giphy.com/embed/0juzz91OmCypdRUlSy" width="480" height="260" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/0juzz91OmCypdRUlSy">via GIPHY</a></p>
 
-Frontend: 
+**Frontend:** 
 Linhas de comando : entrar na pasta frontend - > npm i , apos alguns minutos -> npm run serve
 <iframe src="https://giphy.com/embed/ZfJStbZRuHubxJpZBI" width="480" height="260" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ZfJStbZRuHubxJpZBI">via GIPHY</a></p>
 
