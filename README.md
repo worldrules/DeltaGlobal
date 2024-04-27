@@ -33,7 +33,7 @@ O projeto foi desenvolvido com as tecnologias abaixo: <br>
 * MySQL
 
 
-### 💡 Tecnologias utilizadas
+### 💡 Libs utilizadas
 * Bulma CSS
 * Font Awesome
 * React-hooks
