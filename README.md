@@ -54,9 +54,12 @@ O projeto foi desenvolvido com as tecnologias abaixo: <br>
 Primeiramente é necessário ter no PC, node instalado , xampp se possível.
 O projeto está dividido em duas pastas :
 Backend:
+Linhas de comando : entrar na pasta backend - > php spark serve
+
 <iframe src="https://giphy.com/embed/0juzz91OmCypdRUlSy" width="480" height="260" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/0juzz91OmCypdRUlSy">via GIPHY</a></p>
 
 Frontend: 
+Linhas de comando : entrar na pasta frontend - > npm i , apos alguns minutos -> npm run serve
 <iframe src="https://giphy.com/embed/ZfJStbZRuHubxJpZBI" width="480" height="260" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ZfJStbZRuHubxJpZBI">via GIPHY</a></p>
 
 Feito isso temos o Backend rodando e o Frontend rodando.
@@ -79,4 +82,5 @@ VALUES
  * Agregar TypeScript , para evoluir o código , incluir tipagem.
  * Desenvolver Testes, é muito bom uma rotina de testes seja de código ou testes de usabilidade.
  * Colher feedbacks dos usuários e melhorar quaisquer pontos que forem precisos.
- * 
+   
+OBS.: Os gifs, não ficaram com a melhor qualidade mas ele só demonstra o que foi descrito acima.
