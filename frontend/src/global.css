@@ -30,6 +30,17 @@ body {
     margin-right: auto !important;
 }
 
+.buttondel {
+    color: black !important;
+    display: flex !important;
+    align-items: center !important;
+    margin-top: 20px !important;
+    width: 20% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    background-color: #f16666 !important;
+}
+
 .aluno-avatar {
     width: 100px;
     height: auto;

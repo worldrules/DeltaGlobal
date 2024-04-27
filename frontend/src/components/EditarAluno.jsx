@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import defaultAvatar from '../assets/default-avatar.jpg';
 
 const EditarAluno = () => {
+    const [imagem, setImagem] = useState(null);
     const { id } = useParams();
     const navigateTo = useNavigate();
 
@@ -46,6 +48,18 @@ const EditarAluno = () => {
             [e.target.name]: e.target.value
         });
     };
+    const handleImagemChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setImagem(reader.result);
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -63,6 +77,21 @@ const EditarAluno = () => {
         <div className="container">
             <h2 className="title">Editar Aluno</h2>
             <form onSubmit={handleSubmit}>
+                <div className="field">
+                    <div className="control">
+                        <input
+                            className="input"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImagemChange}
+                        />
+                        {imagem ? (
+                            <img src={imagem} alt="Foto do Aluno" className="aluno-avatar" />
+                        ) : (
+                            <img src={defaultAvatar} alt="Foto do Aluno" className="aluno-avatar" />
+                        )}
+                    </div>
+                </div>
                 <div className="field">
                     <label className="label">Nome</label>
                     <div className="control">

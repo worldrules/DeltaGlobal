@@ -4,11 +4,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import defaultAvatar from '../assets/default-avatar.jpg';
 import ModalDetalhesAluno from './ModalDetalhesAluno';
+import AlertMessage from './AlertMessage';
+
 
 const ListaAlunos = () => {
     const [alunos, setAlunos] = useState([]);
     const [alunoSelecionado, setAlunoSelecionado] = useState(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [showDeleteMessage, setShowDeleteMessage] = useState(false);
 
     useEffect(() => {
         getAlunos();
@@ -19,6 +22,7 @@ const ListaAlunos = () => {
             const response = await axios.get('http://localhost:8080/alunos');
             setAlunos(response.data);
             console.log(alunos)
+
         } catch (error) {
             console.error('Erro ao obter alunos:', error);
         }
@@ -33,20 +37,19 @@ const ListaAlunos = () => {
         try {
             await axios.delete(`http://localhost:8080/alunos/${id}`);
             setAlunos(alunos.filter(aluno => aluno.id !== id));
+            setShowDeleteMessage(true);
+            setTimeout(() => {
+                setShowDeleteMessage(false);
+            }, 3000);
         } catch (error) {
             console.error('Erro ao deletar aluno:', error);
         }
     }
 
-    const renderizarImagem = (base64Image) => {
-        return (
-            <img src={base64Image} alt="Foto do Aluno" className="aluno-avatar-lista" />
-        );
-    }
-
     return (
         <div>
             <h2 className="title">Lista de Alunos</h2>
+            {showDeleteMessage && <AlertMessage message="Aluno excluído com sucesso" type="buttondel" />}
 
             <table className='table is-striped is-fullwidth'>
                 <thead>
@@ -73,11 +76,7 @@ const ListaAlunos = () => {
                             <td onClick={() => handleAlunoClick(aluno)}>{aluno.nome_pai}</td>
                             <td onClick={() => handleAlunoClick(aluno)}>{aluno.nome_mae}</td>
                             <td>
-                                {aluno.foto ? (
-                                    renderizarImagem(aluno.foto)
-                                ) : (
-                                    <img src={defaultAvatar} onClick={() => handleAlunoClick(aluno)} alt="Foto do Aluno" className="aluno-avatar-lista" />
-                                )}
+                                <img src={defaultAvatar} onClick={() => handleAlunoClick(aluno)} alt="Foto do Aluno" className="aluno-avatar-lista" />
                             </td>
                             <td className='buttons'>
                                 <Link to={`/editar-aluno/${aluno.id}`} className='button is-small is-info'>Editar</Link>
